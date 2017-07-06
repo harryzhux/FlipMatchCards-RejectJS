@@ -1,0 +1,21 @@
+{
+  "name": "FlipMatchCards-ReactJS",
+  "version": "0.1.0",
+  "description": "Implement Flip-Match Card Game with React.js",
+  "anthor": "Harry Zhu <harryzhux@gmail.com> (http://github.com/harryzhux)",
+  "license": "MIT",
+  "repository": "http://github.com/harryzhux/FlipMatchCards-ReactJS",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.10"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
