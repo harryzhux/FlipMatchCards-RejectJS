@@ -57,6 +57,8 @@ class Board extends React.Component {
             preClicked: null,
             clicked: null,
         };
+        this.handleClick = this.handleClick.bind(this);
+        this.renderCard = this.renderCard.bind(this);
     }
 
     handleClick(i) {
@@ -71,45 +73,39 @@ class Board extends React.Component {
                 preClicked: prevState.clicked,
                 clicked: i,
             };
-        }, this.resetState);
+        });
+	// put in callback to check match and update state did not work
+
         /* why not showing the 2nd clicked card value, too fast? */
         //setTimeout(this.resetState(), 3000) );
     }
 
-    resetState() {
-	const nClicked = this.state.nClicked;
-        const isEven = ((nClicked - 1) % 2 > 0);
-        if (!isEven || !nClicked) return;
-        const preClicked = this.state.preClicked;
+    componentDidUpdate(prevProps, prevState) {
+	const nClicked = prevState.nClicked + 1;
+        const isEven = (nClicked - 1) % 2;
+alert([nClicked, isEven]);
+        if (!isEven) return;
+        const preClicked = prevState.clicked;
         const clicked = this.state.clicked;
         const matched = (cardStored[preClicked] === cardStored[clicked]);
-        alert([preClicked, clicked, isEven, cardStored[preClicked], cardStored[clicked], matched]);
-        if (matched) {
-            this.setState((prevState) => {
-                return {
-                    // cards: prevState.cards,
-                    // nMatched: prevState.nMatched,
-                    // nClicked: prevState.nClicked,
-                    preClicked: null,
-                    clicked: null,
-                };
-            }, () => alert(JSON.stringify(this.state)));
-        } else {
-            /* why not showing the 2nd clicked card value, need force rendering? */
+alert([preClicked, clicked, isEven, cardStored[preClicked], cardStored[clicked], matched]);
+        const upCards = this.state.cards.slice();
+        let nMatched = this.state.nMatched;
+        if (!matched) {
+            /* why not showing the 2nd clicked card value,  even rendering? */
             // this.forceUpdate();
-            this.setState((prevState) => {
-                const upCards = prevState.cards.slice();
-                upCards[preClicked] = null;
-                upCards[clicked] = null;
-                return {
-                    cards: upCards,
-                    nMatched: prevState.nMatched + 1,
-                    // nClicked: prevState.nClicked,
-                    preClicked: null,
-                    clicked: null,
-                };
-            }, () => alert(JSON.stringify(this.state)));
+            upCards[preClicked] = null;
+            upCards[clicked] = null;
+        } else {
+            nMatched++; 
         }
+        this.setState({
+            cards: upCards,
+            nMatched: nMatched,
+            // nClicked: prevState.nClicked,
+            preClicked: null,
+            clicked: null,
+        });
     }
 
     renderCard(i) {
