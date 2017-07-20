@@ -4,7 +4,7 @@
   "description": "Implement Flip-Match Card Game with React.js",
   "anthor": "Harry Zhu <harryzhux@gmail.com> (http://github.com/harryzhux)",
   "license": "MIT",
-  "repository": "http://github.com/harryzhux/FlipMatchCards-ReactJS",
+  "repository": "https://github.com/harryzhux/FlipMatchCards-ReactJS",
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
